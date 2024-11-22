@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  users-service:
+    build:
+      context: ./users
+    ports:
+      - "3001:3001"
+    container_name: users-service
+    networks:
+      - msa-network
+
+  orders-service:
+    build:
+      context: ./orders
+    ports:
+      - "3002:3002"
+    container_name: orders-service
+    networks:
+      - msa-network
+
+  api-gateway:
+    build:
+      context: ./gateway
+    ports:
+      - "3000:3000"
+    container_name: api-gateway
+    networks:
+      - msa-network
+
+networks:
+  msa-network:
+    driver: bridge
+
